@@ -9,7 +9,7 @@ const Header = ({ name }) => {
         <h1 className="text-5xl pb-2">{name}</h1>
         <ThemeIcon/>
         <Search />
-      </div>``
+      </div>
     </>
   );
 };

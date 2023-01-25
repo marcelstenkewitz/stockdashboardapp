@@ -23,7 +23,7 @@ export const stockDropdownList = [
     symbol: "IBM",
   },
   {
-    name: "ALPHABET INC-CL A",
+    name: "ALPHABET INC-CL A" && "GOOGLE",
     symbol: "GOOGL",
   },
   {

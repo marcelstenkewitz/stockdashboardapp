@@ -12,7 +12,7 @@ import ThemeContext from "../context/ThemeContext";
 import Card from "./Card";
 import ChartFilter from "./ChartFilter";
 
-const Chart = ({ filter, setFilter, data}) => {
+const Chart = ({ filter, setFilter, data }) => {
 
   const { darkMode } = useContext(ThemeContext);
 

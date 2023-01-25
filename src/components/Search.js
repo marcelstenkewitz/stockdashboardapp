@@ -6,13 +6,14 @@ import { stockDropdownList } from "../constants/config";
 
 const Search = () => {
   const [input, setInput] = useState("");
+  const [focus, setFocus] = useState(false);
   const [bestMatches, setBestMatches] = useState(stockDropdownList);
 
   const { darkMode } = useContext(ThemeContext);
 
   const clear = () => {
     setInput("");
-    setBestMatches([]);
+    setBestMatches(stockDropdownList);
   };
 
   const updateBestMatches = () => {
@@ -22,12 +23,12 @@ const Search = () => {
         item.symbol.includes(input.toUpperCase())
     );
 
-    setBestMatches(results)
+    setBestMatches(results);
   };
 
   return (
     <div
-      className={`flex items-center border-2 rounded-md w-auto md:w-96  ${
+      className={`flex items-center border-2 rounded-md relative w-auto md:w-96  ${
         darkMode ? "bg-gray-900 border-gray-800" : "bg-white border-neutral-200"
       }`}
     >
@@ -38,27 +39,19 @@ const Search = () => {
           darkMode ? "bg-gray-900" : null
         }`}
         placeholder="Search stock..."
+        onFocus={() => {
+          setFocus(true);
+        }}
+        onBlur={() => {
+          setFocus(false);
+        }}
         onChange={(e) => setInput(e.target.value)}
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            updateBestMatches();
-          }
+        onKeyUp={() => {
+          updateBestMatches();
         }}
       />
-      {input && (
-        <button onClick={clear}>
-          <XMarkIcon className="h-4 w-4 fill-gray-500" />
-        </button>
-      )}
 
-      <button
-        onClick={updateBestMatches}
-        className="h-8 w-8 bg-indigo-600 rounded-md flex justify-center items-center m-1 p-2 transition duration-300 hover:ring-2 ringindigo-400"
-      >
-        <MagnifyingGlassIcon className="h-4 w-4 fill-gray-100" />
-      </button>
-
-      {input && bestMatches.length > 0 ? (
+      {focus && bestMatches.length > 0 ? (
         <SearchResults results={bestMatches} />
       ) : null}
     </div>

@@ -8,7 +8,7 @@ const SearchResults = ({ results }) => {
 
   return (
     <ul
-      className={`absolute top-12 border-2 w-full rounded-md h-auto overflow-y-scroll custom-scrollbar ${
+      className={`absolute top-12 border-2 w-40 rounded-md h-auto overflow-y-scroll z-50 custom-scrollbar ${
         darkMode
           ? "bg-gray-900 border-gray-800 custom-scrollbar custom-scrollbar-dark"
           : "bg-white border-neutral-200 "
@@ -21,7 +21,8 @@ const SearchResults = ({ results }) => {
             className={`cursor-pointer p-4 m-2 flex item-center justify-between rounded-md transition-duration-300 ${
               darkMode ? "hover:bg-indigo-600" : "hover:bg-indigo-200"
             }`}
-            onClick={() => {
+            onMouseDown={() => {
+              console.log('this happened')
               setStockSymbol(item.symbol);
             }}
           >
