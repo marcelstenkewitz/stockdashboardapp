@@ -6,13 +6,13 @@ import Chart from "./Chart";
 import ThemeContext from "../context/ThemeContext";
 import StockContext from "../context/StockContext";
 import { chartConfig } from "../constants/config";
-import { fetchHistoricalData } from "../api/stock_api";
+import { fetchHistoricalData } from "../util/api/stock_api";
 import {
   convertUnixTimeStampToDate,
   convertDateToUnixTimeStamp,
   createDate,
-} from "../helper/date-helper";
-import { fetchStockDetails } from "../api/stock_api";
+} from "../util/date/date-helper"
+import { fetchStockDetails } from "../util/api/stock_api";
 
 const Dashboard = () => {
   const { darkMode } = useContext(ThemeContext);

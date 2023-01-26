@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import SearchResults from "./SearchResults";
 import ThemeContext from "../context/ThemeContext";
 import { stockDropdownList } from "../constants/config";
