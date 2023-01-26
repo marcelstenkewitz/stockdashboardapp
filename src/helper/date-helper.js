@@ -1,3 +1,5 @@
+//Utility functions to format dates for FinnHub API as it only uses Unix timestamps.
+
 export const convertDateToUnixTimeStamp = (date) => {
     return Math.floor(date.getTime()/1000)
 }

@@ -5,6 +5,7 @@ import Card from "./Card";
 const Details = ({ details }) => {
   const { darkMode } = useContext(ThemeContext);
 
+  //Object to rename the details retrieved by fetchStockDetails. 
   const detailsList = {
     name: "Name",
     country: "Country",
@@ -15,6 +16,7 @@ const Details = ({ details }) => {
     finnhubIndustry: "Industry",
   };
 
+  //Utility function to format market capitalization correctly.
   const convertMilliontoBillion = (number) => {
     return (number / 1000).toFixed(2);
   };

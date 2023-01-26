@@ -11,11 +11,7 @@ const Search = () => {
 
   const { darkMode } = useContext(ThemeContext);
 
-  const clear = () => {
-    setInput("");
-    setBestMatches(stockDropdownList);
-  };
-
+  //Sets the best matches to the symbol that closest matches the input.
   const updateBestMatches = () => {
     const results = stockDropdownList.filter(
       (item) =>

@@ -19,8 +19,13 @@ const Dashboard = () => {
   const { stockSymbol } = useContext(StockContext);
   const [stockDetails, setStockDetails] = useState({});
   const [filter, setFilter] = useState("1W");
-  const [data, setData] = useState([]);
+  const [stockTickData, setStockTickData] = useState([]);
 
+  /*
+    *Formats the data for Recharts.
+    *Data refers to historical stock data.
+    *data.c is the close prices for returned candles.
+  */
   const formatData = (data) => {
     return data.c.map((item, index) => {
       return {
@@ -30,6 +35,8 @@ const Dashboard = () => {
     });
   };
 
+
+//Calculates the dollar change between the start of the historical stock data and the end.
   const calculateChange = (data) => {
     const firstDataPoint = data[0].value;
     const lastDataPoint = data[data.length - 1].value;
@@ -37,6 +44,8 @@ const Dashboard = () => {
     return (lastDataPoint - firstDataPoint).toFixed(2)
   };
 
+
+//Calculates the percent change between the start of the historical stock data and the end.
   const calculatePercentageFromData = (data) => {
     const firstDataPoint = data[0].value;
     const lastDataPoint = data[data.length - 1].value;
@@ -44,12 +53,13 @@ const Dashboard = () => {
     return (((lastDataPoint - firstDataPoint)/firstDataPoint) * 100).toFixed(2)
   };
 
+  //Fetches data upon stock symbol or filter change.
   useEffect(() => {
+    //Calculates the start time and end time to provide the fetchHistoricalData API call.
     const getDateRange = () => {
       const { days, weeks, months, years } = chartConfig[filter];
 
-      const endDate = new Date();
-      console.log(endDate);
+      const endDate = new Date();      console.log(endDate);
       const startDate = createDate(endDate, -days, -weeks, -months, -years);
 
       console.log(startDate);
@@ -60,6 +70,7 @@ const Dashboard = () => {
       return { startTimestampUnix, endTimestampUnix };
     };
 
+    //Updates the chart data.
     const updateChartData = async () => {
       try {
         const { startTimestampUnix, endTimestampUnix } = getDateRange();
@@ -71,14 +82,15 @@ const Dashboard = () => {
           startTimestampUnix,
           endTimestampUnix
         );
-        setData(formatData(result));
+        setStockTickData(formatData(result));
       } catch (error) {
-        setData([]);
+        setStockTickData([]);
         console.log(error);
       }
     };
     updateChartData();
 
+    //Updates the stock details such as currency, exchange, IPO date.
     const updateStockDetails = async () => {
       try {
         const result = await fetchStockDetails(stockSymbol);
@@ -102,15 +114,15 @@ const Dashboard = () => {
         <Header name={stockDetails.name} setFilter={setFilter} filter={filter} />
       </div>
       <div className="md:col-span-2 row-span-4">
-        <Chart data={data} />
+        <Chart data={stockTickData} />
       </div>
       <div>
-        {data.length > 0 && (
+        {stockTickData.length > 0 && (
           <Overview
             symbol={stockSymbol}
-            price={data[data.length - 1].value}
-            change={calculateChange(data)}
-            changePercent={calculatePercentageFromData(data)}
+            price={stockTickData[stockTickData.length - 1].value}
+            change={calculateChange(stockTickData)}
+            changePercent={calculatePercentageFromData(stockTickData)}
             currency={stockDetails.currency}
           />
         )}

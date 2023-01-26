@@ -4,7 +4,9 @@ import StockContext from "./context/StockContext";
 import ThemeContext from "./context/ThemeContext";
 
 function App() {
+  //Application theme.
   const [darkMode, setDarkMode] = useState(false);
+  //stockSymbol the application is currently loading.
   const [stockSymbol, setStockSymbol] = useState("TSLA")
 
   return (

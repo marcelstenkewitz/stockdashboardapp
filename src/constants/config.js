@@ -1,3 +1,4 @@
+//Config for fetchHistoricalData API call.
 export const chartConfig = {
   "1D": { days: 1, weeks: 0, months: 0, years: 0, resolution: "1" },
   "1W": { days: 0, weeks: 1, months: 0, years: 0, resolution: "15" },
@@ -5,6 +6,7 @@ export const chartConfig = {
   "1Y": { days: 0, weeks: 0, months: 0, years: 1, resolution: "D" },
 };
 
+//Available stock symbols we are allowed to search due to free API limitations. 
 export const stockDropdownList = [
   {
     name: "TESLA INC",

@@ -10,7 +10,7 @@ import {
 import ThemeContext from "../context/ThemeContext";
 import Card from "./Card";
 
-
+//Data refers to historical stock data.
 const Chart = ({ data }) => {
 
   const { darkMode } = useContext(ThemeContext);
