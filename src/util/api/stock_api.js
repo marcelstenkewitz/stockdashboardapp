@@ -22,7 +22,7 @@ export const fetchStockDetails = async (stockSymbol) => {
  * @param {string} stockSymbol - Symbol we pass in the API call. Set by setStockSymbol.
  * @param {string} resolution - Timeframe we query the data by. Configurations should be set in ./constants/config.js
  * @param {string} from - UNIX timestamp. Interval initial value.
- * @param {string} from - UNIX timestamp. Interval end value.
+ * @param {string} to - UNIX timestamp. Interval end value.
  * @returns {Promise<Object[]>} - Response containing response attributes. The following are used by this application:
  * c: List of close prices for returned candles.
 */
