@@ -6,7 +6,7 @@ import ThemeContext from "./context/ThemeContext";
 function App() {
   //Application theme.
   const [darkMode, setDarkMode] = useState(false);
-  //stockSymbol the application is currently loading.
+  //stockSymbol the application is passing to the FinnHub API calls.
   const [stockSymbol, setStockSymbol] = useState("TSLA")
 
   return (
