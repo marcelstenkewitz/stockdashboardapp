@@ -12,13 +12,12 @@ import {
   convertDateToUnixTimeStamp,
   createDate,
 } from "../helper/date-helper";
-import { fetchQuote, fetchStockDetails } from "../api/stock_api";
+import { fetchStockDetails } from "../api/stock_api";
 
 const Dashboard = () => {
   const { darkMode } = useContext(ThemeContext);
   const { stockSymbol } = useContext(StockContext);
   const [stockDetails, setStockDetails] = useState({});
-  const [quote, setQuote] = useState({});
   const [filter, setFilter] = useState("1W");
   const [data, setData] = useState([]);
 
@@ -90,18 +89,7 @@ const Dashboard = () => {
       }
     };
 
-    const updateStockOverview = async () => {
-      try {
-        const result = await fetchQuote(stockSymbol);
-        setQuote(result);
-      } catch (error) {
-        setQuote({});
-        console.log(error);
-      }
-    };
-
     updateStockDetails();
-    updateStockOverview();
   }, [stockSymbol, filter]);
 
   return (
@@ -111,10 +99,10 @@ const Dashboard = () => {
       }`}
     >
       <div className="col-span-1 md:col-span-2 xl:col-span-3 row-span-1 flex justify-start items-center">
-        <Header name={stockDetails.name} />
+        <Header name={stockDetails.name} setFilter={setFilter} filter={filter} />
       </div>
       <div className="md:col-span-2 row-span-4">
-        <Chart filter={filter} setFilter={setFilter} data={data} />
+        <Chart data={data} />
       </div>
       <div>
         {data.length > 0 && (

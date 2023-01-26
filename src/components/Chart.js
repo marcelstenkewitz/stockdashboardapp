@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import {
   Area,
   AreaChart,
@@ -7,30 +7,16 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { chartConfig } from "../constants/config";
 import ThemeContext from "../context/ThemeContext";
 import Card from "./Card";
-import ChartFilter from "./ChartFilter";
 
-const Chart = ({ filter, setFilter, data }) => {
+
+const Chart = ({ data }) => {
 
   const { darkMode } = useContext(ThemeContext);
 
   return (
     <Card>
-      <ul className="flex absolute top-2 right-2">
-        {Object.keys(chartConfig).map((item) => (
-          <li key={item}>
-            <ChartFilter
-              text={item}
-              active={filter === item}
-              onClick={() => {
-                setFilter(item);
-              }}
-            />
-          </li>
-        ))}
-      </ul>
       <ResponsiveContainer>
         <AreaChart data={data}>
           <defs>
