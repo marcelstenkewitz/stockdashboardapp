@@ -18,7 +18,7 @@ export const fetchStockDetails = async (stockSymbol) => {
 };
 
 /*
- * Get candlestick data for stocks - used to show current price and update chart. 
+ * Get candlestick data for stocks - used to show current price, calculate dollar/percentage difference and update chart. 
  * @param {string} stockSymbol - Symbol we pass in the API call. Set by setStockSymbol.
  * @param {string} resolution - Timeframe we query the data by. Configurations should be set in ./constants/config.js
  * @param {string} from - UNIX timestamp. Interval initial value.
