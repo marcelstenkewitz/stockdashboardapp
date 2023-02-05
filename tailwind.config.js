@@ -7,7 +7,7 @@ module.exports = {
         white: "white",
         none: "none"
       },
-      borderWdith: {
+      borderWidth: {
         1:"1px"
       },
       fontFamily: {
