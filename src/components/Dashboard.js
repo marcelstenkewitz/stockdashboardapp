@@ -11,55 +11,56 @@ import {
   convertUnixTimeStampToDate,
   convertDateToUnixTimeStamp,
   createDate,
-} from "../util/date/date-helper"
+} from "../util/date/date-helper";
 import { fetchStockDetails } from "../util/api/stock_api";
 
 const Dashboard = () => {
   const { darkMode } = useContext(ThemeContext);
   const { stockSymbol } = useContext(StockContext);
-  const [stockDetails, setStockDetails] = useState({});
   const [filter, setFilter] = useState("1W");
-  const [stockTickData, setStockTickData] = useState([]);
 
-  /*
-    *Formats the data for Recharts.
-    *Data refers to historical stock data.
-    *data.c is the close prices for returned candles.
-  */
-  const formatData = (data) => {
-    return data.c.map((item, index) => {
-      return {
-        value: item.toFixed(2),
-        date: convertUnixTimeStampToDate(data.t[index]),
-      };
-    });
-  };
+  const useDashboardHelper = () => {
+    const [stockTickData, setStockTickData] = useState([]);
+    const [stockDetails, setStockDetails] = useState({});
+    /*
+     *Formats the data for Recharts.
+     *Data refers to historical stock data.
+     *data.c is the close prices for returned candles.
+     */
+    const formatData = (data) => {
+      return data.c.map((item, index) => {
+        return {
+          value: item.toFixed(2),
+          date: convertUnixTimeStampToDate(data.t[index]),
+        };
+      });
+    };
 
+    //Calculates the dollar change between the start of the historical stock data and the end.
+    const calculateChange = (data) => {
+      const firstDataPoint = data[0].value;
+      const lastDataPoint = data[data.length - 1].value;
 
-//Calculates the dollar change between the start of the historical stock data and the end.
-  const calculateChange = (data) => {
-    const firstDataPoint = data[0].value;
-    const lastDataPoint = data[data.length - 1].value;
+      return (lastDataPoint - firstDataPoint).toFixed(2);
+    };
 
-    return (lastDataPoint - firstDataPoint).toFixed(2)
-  };
+    //Calculates the percent change between the start of the historical stock data and the end.
+    const calculatePercentChange = (data) => {
+      const firstDataPoint = data[0].value;
+      const lastDataPoint = data[data.length - 1].value;
 
+      return (
+        ((lastDataPoint - firstDataPoint) / firstDataPoint) *
+        100
+      ).toFixed(2);
+    };
 
-//Calculates the percent change between the start of the historical stock data and the end.
-  const calculatePercentageFromData = (data) => {
-    const firstDataPoint = data[0].value;
-    const lastDataPoint = data[data.length - 1].value;
-
-    return (((lastDataPoint - firstDataPoint)/firstDataPoint) * 100).toFixed(2)
-  };
-
-  //Fetches data upon stock symbol or filter change.
-  useEffect(() => {
     //Calculates the start time and end time to provide the fetchHistoricalData API call.
     const getDateRange = () => {
       const { days, weeks, months, years } = chartConfig[filter];
 
-      const endDate = new Date();      console.log(endDate);
+      const endDate = new Date();
+      console.log(endDate);
       const startDate = createDate(endDate, -days, -weeks, -months, -years);
 
       console.log(startDate);
@@ -88,7 +89,6 @@ const Dashboard = () => {
         console.log(error);
       }
     };
-    updateChartData();
 
     //Updates the stock details such as currency, exchange, IPO date.
     const updateStockDetails = async () => {
@@ -101,7 +101,25 @@ const Dashboard = () => {
       }
     };
 
-    updateStockDetails();
+    return {
+      stockTickData,
+      stockDetails,
+      formatData,
+      calculateChange,
+      calculatePercentChange,
+      getDateRange,
+      updateChartData,
+      updateStockDetails,
+    };
+  };
+
+  //Dashboard helper hook.
+  const dashboardHelper = useDashboardHelper();
+
+  //Fetches data upon stock symbol or filter change.
+  useEffect(() => {
+    dashboardHelper.updateChartData();
+    dashboardHelper.updateStockDetails();
   }, [stockSymbol, filter]);
 
   return (
@@ -111,7 +129,11 @@ const Dashboard = () => {
       }`}
     >
       <div className="col-span-1 md:col-span-2 xl:col-span-3 row-span-1 flex justify-start items-center">
-        <Header name={stockDetails.name} setFilter={setFilter} filter={filter} />
+        <Header
+          name={stockDetails.name}
+          setFilter={setFilter}
+          filter={filter}
+        />
       </div>
       <div className="md:col-span-2 row-span-4">
         <Chart data={stockTickData} />
@@ -122,7 +144,7 @@ const Dashboard = () => {
             symbol={stockSymbol}
             price={stockTickData[stockTickData.length - 1].value}
             change={calculateChange(stockTickData)}
-            changePercent={calculatePercentageFromData(stockTickData)}
+            changePercent={calculatePercentChange(stockTickData)}
             currency={stockDetails.currency}
           />
         )}
