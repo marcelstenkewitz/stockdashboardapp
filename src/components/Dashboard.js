@@ -30,7 +30,7 @@ const Dashboard = () => {
     const formatData = (data) => {
       return data.c.map((item, index) => {
         return {
-          value: item.toFixed(2),
+          value: Number(item.toFixed(2)),
           date: convertUnixTimeStampToDate(data.t[index]),
         };
       });
@@ -114,17 +114,17 @@ const Dashboard = () => {
   };
 
   //Dashboard helper hook.
-  const dashboardHelper = useDashboardHelper();
+  const { updateChartData, updateStockDetails, stockDetails, stockTickData, calculateChange, calculatePercentChange } = useDashboardHelper();
 
   //Fetches data upon stock symbol or filter change.
   useEffect(() => {
-    dashboardHelper.updateChartData();
-    dashboardHelper.updateStockDetails();
+    updateChartData();
+    updateStockDetails();
   }, [stockSymbol, filter]);
 
   return (
     <div
-      className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-rows-8 md:grid-rows-7 xl:grid-rows-5 auto-rows-fr gap-2 px-2 xl:p-10 font-quicksand  ${
+      className={`md:h-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-rows-8 md:grid-rows-7 xl:grid-rows-5 auto-rows-fr gap-2 px-2 xl:p-10 font-quicksand  ${
         darkMode ? "bg-gray-900 text-gray-300" : "bg-neutral-100"
       }`}
     >
