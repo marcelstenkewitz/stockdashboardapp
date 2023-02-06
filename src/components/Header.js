@@ -7,8 +7,12 @@ import ChartFilter from "./ChartFilter";
 const Header = ({ name, filter, setFilter }) => {
   return (
     <>
-      <div className="xl:px-32">
-        <h1 className="text-5xl pb-2">{name}</h1>
+      <div className="w-full xl:px-32">
+        <div>
+          <h1 className="text-3xl md:text-5xl overflow-scroll	 whitespace-nowrap pb-2">
+            {name}
+          </h1>
+        </div>
         <ThemeIcon />
         <Search />
         <div>
