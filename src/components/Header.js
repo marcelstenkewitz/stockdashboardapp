@@ -9,7 +9,7 @@ const Header = ({ name, filter, setFilter }) => {
     <>
       <div className="w-full xl:px-32">
         <div>
-          <h1 className="text-3xl md:text-5xl overflow-scroll	 whitespace-nowrap pb-2">
+          <h1 className="text-3xl md:text-5xl text-ellipsis overflow-hidden whitespace-nowrap pb-2">
             {name}
           </h1>
         </div>
