@@ -23,7 +23,7 @@ const Search = () => {
 
   return (
     <div
-      className={`flex items-center border-2 rounded-md relative w-auto md:w-96  ${
+      className={`flex items-center border-2 rounded-md relative w-60 md:w-96  ${
         darkMode ? "bg-gray-900 border-gray-800" : "bg-white border-neutral-200"
       }`}
     >
