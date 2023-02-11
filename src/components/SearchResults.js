@@ -22,7 +22,6 @@ const SearchResults = ({ results }) => {
               darkMode ? "hover:bg-indigo-600" : "hover:bg-indigo-200"
             }`}
             onMouseDown={() => {
-              console.log('this happened')
               setStockSymbol(item.symbol);
             }}
           >

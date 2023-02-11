@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Area,
   AreaChart,
@@ -7,18 +7,19 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import ThemeContext from "../context/ThemeContext";
-import Card from "./Card";
+import { useChartHelper } from "./ChartHelper";
+import ThemeContext from "../../context/ThemeContext";
+import Card from "../Card";
 
 //Data refers to historical stock data.
-const Chart = ({ data }) => {
-
+const Chart = () => {
+  const { stockCandleData } = useChartHelper();
   const { darkMode } = useContext(ThemeContext);
 
   return (
     <Card>
       <ResponsiveContainer>
-        <AreaChart data={data}>
+        <AreaChart data={stockCandleData}>
           <defs>
             <linearGradient id="chartColor" x1="0" y1="0" x2="0" y2="1">
               <stop
