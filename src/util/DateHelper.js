@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import FilterContext from "../context/FilterContext";
+import { FilterContext } from "../Context";
 import { chartConfig } from "../constants/config";
 
 export const useDateHelper = () => {
-const { filter } = useContext(FilterContext);
+  const { filter } = useContext(FilterContext);
 
   //Utility functions to format dates for FinnHub API as it only uses Unix timestamps.
   const convertDateToUnixTimeStamp = (date) => {

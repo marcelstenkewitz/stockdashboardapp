@@ -33,7 +33,7 @@ export const stockDropdownList = [
     symbol: "META",
   },
   {
-    name: "Netflix Inc",
+    name: "NETFLIX INC",
     symbol: "NFLX",
   },
 ];

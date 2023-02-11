@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import SearchResults from "./SearchResults";
-import ThemeContext from "../context/ThemeContext";
+import { ThemeContext } from "../Context";
 import { stockDropdownList } from "../constants/config";
 
 const Search = () => {

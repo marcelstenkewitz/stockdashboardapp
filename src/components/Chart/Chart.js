@@ -7,19 +7,17 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { useChartHelper } from "./ChartHelper";
-import ThemeContext from "../../context/ThemeContext";
+import {ThemeContext} from "../../Context";
 import Card from "../Card";
 
 //Data refers to historical stock data.
-const Chart = () => {
-  const { stockCandleData } = useChartHelper();
+const Chart = ({ data }) => {
   const { darkMode } = useContext(ThemeContext);
 
   return (
     <Card>
       <ResponsiveContainer>
-        <AreaChart data={stockCandleData}>
+        <AreaChart data={data}>
           <defs>
             <linearGradient id="chartColor" x1="0" y1="0" x2="0" y2="1">
               <stop

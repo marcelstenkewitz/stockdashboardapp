@@ -2,8 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { fetchHistoricalData } from "../../api/stock_api";
 import { chartConfig } from "../../constants/config";
 import { useDateHelper } from "../../util/DateHelper";
-import StockContext from "../../context/StockContext";
-import FilterContext from "../../context/FilterContext";
+import { StockContext, FilterContext } from "../../Context";
 
 export const useChartHelper = () => {
   const [stockCandleData, setStockCandleData] = useState([]);
@@ -47,6 +46,7 @@ export const useChartHelper = () => {
   //Fetches data upon stock symbol or filter change.
   useEffect(() => {
     updateChartData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stockSymbol, filter]);
 
   return {

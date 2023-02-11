@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import ThemeContext from "../context/ThemeContext";
+import { ThemeContext } from "../Context";
 import { MoonIcon } from "@heroicons/react/24/solid";
 
 const ThemeIcon = () => {

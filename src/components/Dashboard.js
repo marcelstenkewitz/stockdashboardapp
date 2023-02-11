@@ -3,9 +3,7 @@ import Header from "./Header";
 import Details from "./Details";
 import Overview from "./Overview/Overview";
 import Chart from "./Chart/Chart";
-import ThemeContext from "../context/ThemeContext";
-import StockContext from "../context/StockContext";
-import FilterContext from "../context/FilterContext";
+import {ThemeContext, StockContext, FilterContext} from "../Context";
 import { useOverviewHelper } from "./Overview/OverviewHelper"
 import { useChartHelper } from "./Chart/ChartHelper";
 
@@ -30,7 +28,7 @@ const Dashboard = () => {
         />
       </div>
       <div className="md:col-span-2 row-span-4">
-        <Chart />
+        <Chart data={stockCandleData}/>
       </div>
       <div>
         {stockCandleData.length > 0 && (

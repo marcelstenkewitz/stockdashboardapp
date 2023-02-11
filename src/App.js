@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Dashboard from "./components/Dashboard";
-import FilterContext from "./context/FilterContext";
-import StockContext from "./context/StockContext";
-import ThemeContext from "./context/ThemeContext";
+import {ThemeContext, StockContext, FilterContext} from "./Context";
 
 function App() {
   //Application theme.

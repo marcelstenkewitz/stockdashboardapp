@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { fetchStockDetails } from "../../api/stock_api";
-import StockContext from "../../context/StockContext";
-import FilterContext from "../../context/FilterContext";
+import { StockContext, FilterContext } from "../../Context";
 
 export const useOverviewHelper = () => {
   const { stockSymbol } = useContext(StockContext);
@@ -36,10 +35,11 @@ export const useOverviewHelper = () => {
     );
   };
 
-    //Fetches data upon stock symbol or filter change.
-    useEffect(() => {
-      updateOverview();
-    }, [stockSymbol, filter]);
+  //Fetches data upon stock symbol or filter change.
+  useEffect(() => {
+    updateOverview();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stockSymbol, filter]);
 
   return {
     stockOverview,
