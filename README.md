@@ -1,6 +1,6 @@
 ## StockDashboardApp
 
-A React + Tailwind application which communicates with the FinnHub API to display information about stock tickers.
+React + Tailwind application which communicates with the FinnHub API to display information about stock tickers.
 
 ![StockDashboardAppDemo](https://user-images.githubusercontent.com/62860950/218281624-d9c4be44-e151-4409-a9d3-6159a5a3159e.gif)
 
