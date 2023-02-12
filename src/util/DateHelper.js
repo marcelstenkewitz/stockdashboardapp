@@ -22,6 +22,21 @@ export const useDateHelper = () => {
     const endDate = new Date();
     const startDate = createDate(endDate, -days, -weeks, -months, -years);
 
+    if (filter === "1D") {
+      //Quick workaround for markets not being open on Saturday and Sunday.
+      if (startDate.getDay() === 0) {
+        const currentDay = startDate.getDate();
+        startDate.setDate(currentDay - 2);
+      }
+
+      if (startDate.getDay() === 6) {
+        const currentDay = startDate.getDate();
+        startDate.setDate(currentDay - 1);
+      }
+    }
+
+    console.log(startDate);
+
     const startTimestampUnix = convertDateToUnixTimeStamp(startDate);
     const endTimestampUnix = convertDateToUnixTimeStamp(endDate);
 
