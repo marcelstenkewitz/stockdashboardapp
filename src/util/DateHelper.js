@@ -34,9 +34,7 @@ export const useDateHelper = () => {
         startDate.setDate(currentDay - 1);
       }
     }
-
-    console.log(startDate);
-
+    
     const startTimestampUnix = convertDateToUnixTimeStamp(startDate);
     const endTimestampUnix = convertDateToUnixTimeStamp(endDate);
 
