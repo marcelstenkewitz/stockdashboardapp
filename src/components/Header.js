@@ -16,7 +16,7 @@ const Header = ({ name, filter, setFilter }) => {
         <ThemeIcon />
         <Search />
         <div>
-          <ul className="flex top-2 right-2">
+          <ul className="flex top-2 right-2 lg:mb-6">
             {Object.keys(chartConfig).map((item) => (
               <li key={item}>
                 <ChartFilter
